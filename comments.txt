@@ -1,0 +1,62 @@
+//---------------------------------------------------
+// chapter 1 optimization
+added in cargo.toml file for little slower build but fast run time
+[profile.dev]
+opt-level = 1
+[profile.dev.package."*"]
+opt-level = 3
+
+for faster compiler time 
+bevy = { version = "0.11.0", features = ["dynamic_linking"] }
+need to revert this before releasing game
+
+installed lld linker for faster link 
+sudo apt-get install lld
+even faster link, but not using this because it need some more command in the config.toml file which is present in workspace.
+sudo apt-get install mold
+
+created a file 
+// edit I deleted it because causing some error
+rust-toolchain.toml
+and pasted 
+[toolchain]
+channel = "nightly"
+for latest optimization in nightly
+
+//-----------------------------------------------------
+setup 
+// without this it wiil fail to build in lubuntu
+installed 
+sudo apt-get update
+sudo apt-get install libasound2-dev
+rustup update
+sudo apt-get update
+sudo apt-get install libudev-dev
+
+//-----------------------------------------------
+chapter 2  ecs
+entities are a simple type containing a unique integer
+components are rust struct containing #[derive(Component)] 
+system are rust functions
+
+"startup system"  run exactly once, before all other systems, right when our app starts
+
+Command queue to perform impactful changes to the World.
+
+bevy need to first create an app and then add somethings to it like systems(fn) and add plugins etc
+
+fn may take query: Query<&Component_1, With<Component_2>>
+this fill filter the entities we want that containts both the components
+
+//------------------------------------------------
+chapter 3 plugins
+in app .add_plugins(DefaultPlugins) will add default plugins. 
+and also open an empty window because of WindowPlugin and WinitPlugin
+and run event loop
+// DefaultPlugins is equivalent
+CorePlugin::default(),
+InputPlugin::default(),
+WindowPlugin::default(),
+//------------------------------------------------
+// chapter 4 resouces
+done
